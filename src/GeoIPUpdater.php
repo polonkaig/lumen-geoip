@@ -2,11 +2,13 @@
 
 namespace Codenexus\GeoIPlm;
 
+use GeoIp2\Database\Reader;
+
 class GeoIPUpdater
 {
 	/**
 	 * Main update method
-	 * 
+	 *
 	 * @return bool|string
 	 */
 	public function update()
@@ -16,15 +18,31 @@ class GeoIPUpdater
 
 		// Download latest MaxMind GeoLite2 City database to temp location
 		$tmpFile = tempnam(sys_get_temp_dir(), 'maxmind');
-		file_put_contents($tmpFile, fopen($url, 'r'));
+		file_put_contents($tmpFile . 'gz', fopen($url, 'r'));
 
-		// Extract database to proper storage location
-		file_put_contents($databasePath, gzopen($tmpFile, 'r'));
+        // Extract database
+		file_put_contents($tmpFile, gzopen($tmpFile . 'gz', 'r'));
 
-		// Delete temp file
-		unlink($tmpFile);
+        if (!$this->_testDb($tmpFile))
+        {
+            return false;
+        }
+
+        rename($tmpFile, $databasePath);
 
 		return $databasePath;
 	}
 
+    protected function _testDb($path)
+    {
+        $reader = new Reader($path);
+		$record = $reader->city('8.8.8.8');
+
+        if ($record->city->name === 'Mountain View')
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
