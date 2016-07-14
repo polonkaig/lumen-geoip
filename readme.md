@@ -9,7 +9,7 @@ Determine the geographical location of website visitors based on their IP addres
 To install this package, just install through composer
 
 ```
-composer require codenexus/lumen-geoip
+composer require polonkaig/lumen-geoip
 ```
 
 ### Providers
@@ -18,7 +18,7 @@ Next, open `bootstrap/app.php` and add under the Register Service Providers sect
 
 ```php
 ...
-$app->register(Codenexus\GeoIPlm\GeoIPServiceProvider::class);
+$app->register(Polonkaig\GeoIPlm\GeoIPServiceProvider::class);
 ```
 
 ### Update MaxMind GeoLite2 City database
