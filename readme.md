@@ -18,7 +18,7 @@ Next, open `bootstrap/app.php` and add under the Register Service Providers sect
 
 ```php
 ...
-$app->register(Polonkaig\GeoIPlm\GeoIPServiceProvider::class);
+$app->register(Codenexus\GeoIPlm\GeoIPServiceProvider::class);
 ```
 
 ### Update MaxMind GeoLite2 City database
