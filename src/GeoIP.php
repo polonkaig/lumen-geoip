@@ -77,7 +77,7 @@ class GeoIP {
      *
      * @return self
      */
-    private function setClientIp($client_ip)
+    private function setClientIp()
     {
 		$headerKeys = [
 			'HTTP_CLIENT_IP',
