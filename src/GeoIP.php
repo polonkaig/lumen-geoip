@@ -17,7 +17,7 @@ class GeoIP {
 	 */
 	public function __construct()
 	{
-		$this->ip = $this->getClientIp();
+		$this->ip = $this->setClientIp();
 	}
 
 	/**
